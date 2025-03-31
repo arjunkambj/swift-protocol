@@ -42,6 +42,16 @@ export default function TransactionsPage() {
     setError(null);
 
     try {
+      // Check if Supabase is available
+      if (
+        !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+        !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      ) {
+        setError("Transaction history is not available in this environment");
+        setLoading(false);
+        return;
+      }
+
       const { data, error: supabaseError } = await supabase
         .from("swap_transactions")
         .select("*")

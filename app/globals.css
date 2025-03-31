@@ -69,13 +69,13 @@ body {
 
 .token-badge:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15),
-    0 8px 10px -6px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15),
+    0 8px 10px -6px rgba(99, 102, 241, 0.1);
 }
 
 .dark .token-badge:hover {
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2),
-    0 8px 10px -6px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2),
+    0 8px 10px -6px rgba(99, 102, 241, 0.15);
 }
 
 /* Animated stats counters */
@@ -111,9 +111,9 @@ body {
   animation-delay: 0.4s;
 }
 
-/* Custom emerald gradient background */
+/* Custom gradient background - changed from emerald to indigo */
 .bg-emerald-gradient {
-  background: linear-gradient(135deg, #10b981, #047857);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
 }
 
 /* Fixed header styles */
@@ -154,13 +154,13 @@ body {
 }
 
 .cta-button.primary {
-  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1),
-    0 2px 4px -1px rgba(16, 185, 129, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1),
+    0 2px 4px -1px rgba(99, 102, 241, 0.06);
 }
 
 .cta-button.primary:hover {
-  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2),
-    0 4px 6px -2px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2),
+    0 4px 6px -2px rgba(99, 102, 241, 0.1);
 }
 
 .cta-button.secondary {
