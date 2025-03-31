@@ -8,19 +8,197 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171717;
+    --foreground: #f5f5f5;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Dark mode gradient background */
+.dark {
+  background: linear-gradient(to bottom, #171717, #1a1a1a, #1c1c1c);
+}
+
+/* Professional UI styling */
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.step-card {
+  transition: all 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark mode adjustments */
+.dark .feature-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 8px 10px -6px rgba(0, 0, 0, 0.2);
+}
+
+.dark .step-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Token badge styling */
+.token-badge {
+  transition: all 0.3s ease;
+}
+
+.token-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15),
+    0 8px 10px -6px rgba(16, 185, 129, 0.1);
+}
+
+.dark .token-badge:hover {
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2),
+    0 8px 10px -6px rgba(16, 185, 129, 0.15);
+}
+
+/* Animated stats counters */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-item {
+  animation: countUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.stat-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stat-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stat-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stat-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Custom emerald gradient background */
+.bg-emerald-gradient {
+  background: linear-gradient(135deg, #10b981, #047857);
+}
+
+/* Fixed header styles */
+.sticky-header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .sticky-header {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero height */
+@media (max-width: 640px) {
+  header.h-\[75vh\] {
+    height: 80vh;
+  }
+}
+
+/* Dark sections subtle gradient */
+.dark .bg-neutral-900 {
+  background: linear-gradient(to bottom, #171717, #1d1d1d);
+}
+
+.dark .bg-neutral-800 {
+  background: linear-gradient(to bottom, #262626, #2d2d2d);
+}
+
+/* Button effects */
+.cta-button {
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+}
+
+.cta-button.primary {
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1),
+    0 2px 4px -1px rgba(16, 185, 129, 0.06);
+}
+
+.cta-button.primary:hover {
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2),
+    0 4px 6px -2px rgba(16, 185, 129, 0.1);
+}
+
+.cta-button.secondary {
+  box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1),
+    0 2px 4px -1px rgba(255, 255, 255, 0.06);
+}
+
+.cta-button.secondary:hover {
+  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.15),
+    0 4px 6px -2px rgba(255, 255, 255, 0.1);
+}
+
+/* Fix for swap page select elements */
+select.appearance-none {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 110px;
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.dark select.appearance-none {
+  background-color: rgba(79, 70, 229, 0.2);
+  border-color: rgba(79, 70, 229, 0.4);
+}
+
+/* Ensure flex alignment for swap inputs and selects */
+.flex.items-center input.flex-grow {
+  min-width: 0;
+}
+
+/* Fix the dropdown arrow positioning */
+.relative .pointer-events-none.absolute {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
