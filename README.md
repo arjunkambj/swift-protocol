@@ -1,41 +1,36 @@
 # Swift Protocol
 
-An advanced decentralized exchange with custom protocol fees built on Solana.
-
-## Overview
-
-Swift Protocol is a high-performance decentralized exchange interface that leverages cutting-edge aggregation technology to deliver optimal token swaps on the Solana blockchain. The protocol implements a streamlined fee structure to ensure sustainability while maintaining competitive rates.
+Swift Protocol is a decentralized application for token swaps on the Solana blockchain, using Jupiter aggregator for liquidity and optimal swap routes.
 
 ## Features
 
-- Lightning-fast token swaps with automatic best price discovery
-- Optimized 0.3% protocol fee structure for sustainability
-- Real-time price quotes and intelligent execution path routing
-- Seamless wallet integration with popular Solana wallets
-- Advanced aggregation technology for superior liquidity
-- Full Solana Devnet support for testing and development
-- Sleek, modern UI for an exceptional user experience
+- Connect Solana wallets (Phantom, Solflare, etc.)
+- Swap tokens on Solana with real-time market data
+- Transaction history stored in Supabase
+- Modern and responsive UI
+- Slippage control for trading preferences
 
 ## Technology Stack
 
-- **Frontend**: Next.js, React, TailwindCSS
-- **Blockchain**: Solana, Jupiter Aggregation APIs
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Blockchain**: Solana, Jupiter Aggregator API
 - **Wallet Integration**: Solana Wallet Adapter
-- **Deployment**: Vercel (recommended)
+- **Database**: Supabase
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ and npm/yarn
-- A Solana wallet (Phantom, Solflare, etc.)
+- Node.js (v16+)
+- npm or yarn
+- Supabase account
 
 ### Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/swift-protocol.git
+git clone https://github.com/your-username/swift-protocol.git
 cd swift-protocol
 ```
 
@@ -47,16 +42,28 @@ npm install
 yarn
 ```
 
-3. Set up environment variables:
-
-Create a `.env.local` file in the root directory with the following:
+3. Create a `.env.local` file based on `.env.example` and add your credentials:
 
 ```
-NEXT_PUBLIC_SOLANA_NETWORK=devnet
-NEXT_PUBLIC_JUPITER_API=https://quote-api.jup.ag/v6
+NEXT_PUBLIC_SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
-4. Run the development server:
+4. Set up Supabase:
+
+   - Create a new Supabase project
+   - Create a `swap_transactions` table with these columns:
+     - `id` (uuid, primary key)
+     - `fromToken` (text)
+     - `toToken` (text)
+     - `fromAmount` (float8)
+     - `toAmount` (float8)
+     - `walletAddress` (text)
+     - `txSignature` (text)
+     - `timestamp` (bigint)
+
+5. Run the development server:
 
 ```bash
 npm run dev
@@ -64,30 +71,19 @@ npm run dev
 yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## Usage
 
 1. Connect your Solana wallet using the "Connect Wallet" button
-2. Select tokens to swap from the dropdown menus
+2. Select the tokens you want to swap from the dropdown menus
 3. Enter the amount you want to swap
-4. Adjust slippage tolerance if needed (default is 0.5%)
-5. Click the "Swap" button to execute the transaction
-
-## Customizing the Fee
-
-The protocol fee is set to 0.3% by default. To change this, modify the `CUSTOM_FEE_BPS` value in `lib/jupiter.ts`. The fee is specified in basis points (1% = 100 basis points).
-
-## Mainnet Deployment
-
-To deploy to Solana Mainnet:
-
-1. Update the `NEXT_PUBLIC_SOLANA_NETWORK` environment variable to `mainnet-beta`
-2. Update the `FEE_RECIPIENT` address in `lib/jupiter.ts` to your actual fee collection wallet
+4. Review the swap details and rate
+5. Click "Swap" to execute the transaction
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT
 
 ## Acknowledgments
 

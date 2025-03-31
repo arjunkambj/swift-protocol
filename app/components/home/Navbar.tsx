@@ -1,10 +1,18 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useWalletContext } from "@/app/context/WalletContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isConnected, disconnectWallet } = useWalletContext();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // This ensures wallet state is only used after component is mounted on client
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +29,12 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleAppButtonClick = () => {
+    if (isConnected) {
+      disconnectWallet();
+    }
+  };
 
   return (
     <nav
@@ -59,12 +73,21 @@ export default function Navbar() {
               <span>Docs</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-200 group-hover:w-full"></span>
             </Link>
-            <Link
-              href="/swap"
-              className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition cta-button primary"
-            >
-              Launch App
-            </Link>
+            {mounted && isConnected ? (
+              <button
+                onClick={handleAppButtonClick}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition cta-button primary"
+              >
+                Disconnect
+              </button>
+            ) : (
+              <Link
+                href="/swap"
+                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition cta-button primary"
+              >
+                Launch App
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -121,12 +144,21 @@ export default function Navbar() {
           >
             Docs
           </Link>
-          <Link
-            href="/swap"
-            className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700"
-          >
-            Launch App
-          </Link>
+          {mounted && isConnected ? (
+            <button
+              onClick={handleAppButtonClick}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700"
+            >
+              Disconnect
+            </button>
+          ) : (
+            <Link
+              href="/swap"
+              className="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white hover:bg-indigo-700"
+            >
+              Launch App
+            </Link>
+          )}
         </div>
       )}
     </nav>

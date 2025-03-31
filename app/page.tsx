@@ -12,7 +12,7 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-neutral-950 font-inter">
       <Navbar />
       <HeroSection />
-      <main>
+      <main className="dark:bg-neutral-950">
         <FeaturesSection />
         <HowItWorksSection />
         <TokensSection />
